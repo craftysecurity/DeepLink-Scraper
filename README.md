@@ -4,7 +4,9 @@
 
 # Deeplink Scraper
 
-Deeplink Scraper is a Python CLI tool designed to extract deeplinks from web pages. Its useful for appsec teams and pentesters that need to find deeplinks and the paramters that can be passed with them without having to look through code for the builders or manually search the web application. Just provide an Android manifest file and it will parse it and build the correct schemes. Then scrape web pages for them using regex, capturing any matching deeplinks and parameters, including multiple scheme/URL types like "myapp:\\item?=1&category?=2" or HTTP/HTTPS "http\s://myapp.onelink.me/item?=1&category?=2/".
+Deeplink Scraper is a Python CLI tool designed to extract deeplinks from web pages. Its useful for appsec teams and pentesters that need to find deeplinks and the paramters that can be passed with them without having to look through code for the builders or manually search the web application. Just provide an Android manifest, .apk file, .ipa file, or info.plist and it will parse it and build the correct schemes. Then scrape web pages for them using regex, capturing any matching deeplinks and parameters, including multiple scheme/URL types like "myapp:\\item?=1&category?=2" or HTTP/HTTPS "http\s://myapp.onelink.me/item?=1&category?=2/".
+
+![CLI Output](images/deeplink-scraper.png)
 
 ## Features
 
@@ -14,6 +16,7 @@ Deeplink Scraper is a Python CLI tool designed to extract deeplinks from web pag
 - **Threaded Scraping**: Supports multithreaded operation for efficient scraping.
 - **Customizable**: Options to provide single or multiple URLs, set delays, and ignore certain patterns.
 - **Recusive**: Option to recursively search webpages for deeplinks from a base url.
+- **Multi-Platform**: Supports both Android and IOS, extracts schemes from Android manifest, .apk file, .ipa file, or info.plist.
 
 ## Requirements
 
@@ -44,7 +47,7 @@ The Deeplink Extractor can be run from the command line with various options to 
 - `-u`: Single URL to scrape.
 - `-U`: File containing a list of URLs to scrape, one per line.
 - `-uf`: Single URL to scrape recursively, following links on the page.
-- `-m`: Android manifest file to parse for extracting URL schemes (required).
+- `-m`: Android manifest, info.plist, apk file. or ipa file to parse for extracting URL schemes (required).
 - `-o`: Output file to save extracted deeplinks (required).
 - `-t`: Time delay between requests in seconds (default: 3 seconds).
 - `-T`: Number of threads to run (default: 4).
@@ -64,7 +67,7 @@ python3 deeplink-scraper.py -U urls.txt -m manifest.xml -o deeplinks.txt
 
 **Recursive scraping**:
 ```bash
-python3 deeplink-scraper.py -uf "https://example.com" -m manifest.xml -o deeplinks.txt
+python3 deeplink-scraper.py -uf "https://example.com" -m app.ipa -o deeplinks.txt
 ```
 
 ## Output
@@ -73,6 +76,6 @@ The extracted deeplinks are saved to the specified output file -o.
 
 ## TODO 
 
-- [ ] **Add iOS/Info.plist Support**
+- [x] **Add iOS/Info.plist Support**
 - [ ] **Add cookie/authentication Support**
 
